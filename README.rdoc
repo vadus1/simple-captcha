@@ -14,21 +14,18 @@ backward compatibility with previous versions of Rails.
 * Implementation is as easy as just writing a single line in your view. "<%= show_simple_captcha %>" within the 'form' tags.
 * Flexible DOM and CSS handling(There is a separate view partial for rednering SimpleCaptcha DOM elements).
 * Automated removal of 1 hour old unmatched simple_captcha data.
+* Refresh button to refresh captcha
 
 ==Requirements
 
-* {Ruby}[http://ruby-lang.org/] >= 1.8.7
+* {Ruby}[http://ruby-lang.org/] >= 1.9.3
 * {Rails}[http://github.com/rails/rails] >= 3
 * ImageMagick should be installed on your machine to use this plugin.
   visit http://www.imagemagick.org/script/index.php for more details.
 
 ==Installation
 
-  gem "galetahub-simple_captcha", :require => "simple_captcha"
-
-or
-
-  gem 'simple_captcha', :git => 'git://github.com/galetahub/simple-captcha.git'
+  gem 'simple_captcha', github: 'ouyoutouchmytralala/simple-captcha'
 
 ==Setup
 
@@ -223,7 +220,5 @@ Blog: http://expressica.com
 Contact: sur.max@gmail.com
 
 Plugin Homepage: http://expressica.com/simple_captcha
-
-Plugin update for rails 3: http://github.com/galetahub
 
 Any feedback/comment/issue/donation is welcome!
