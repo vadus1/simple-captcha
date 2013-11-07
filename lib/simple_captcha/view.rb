@@ -47,16 +47,29 @@ module SimpleCaptcha #:nodoc
       options[:field_value] = set_simple_captcha_data(key, options)
 
       defaults = {
-         :image   => simple_captcha_image(key, options),
-         :label   => options[:label] || I18n.t('simple_captcha.label'),
-         :field   => simple_captcha_field(options),
-         :refresh_button => simple_captcha_refresh_button(options)
+         image:          simple_captcha_image(key, options),
+         label:          simple_captcha_label(options),
+         field:          simple_captcha_field(options),
+         refresh_button: simple_captcha_refresh_button(options)
          }
 
-      render :partial => 'simple_captcha/simple_captcha', :locals => { :simple_captcha_options => defaults }
+      partial = options[:partial] || 'simple_captcha/simple_captcha'
+      render partial: partial, :locals => { :simple_captcha_options => defaults }
     end
 
     private
+
+      def simple_captcha_label(options = {})
+        html = {id: options[:label_id]}
+        text = options[:label] || I18n.t('simple_captcha.label')
+        if options[:input_html]
+          name = options[:input_html][:id] || 'captcha'
+        else
+          name = 'captcha'
+        end
+
+        label_tag(name, text, html)
+      end
 
       def simple_captcha_image(simple_captcha_key, options = {})
         defaults = {}
@@ -91,7 +104,11 @@ module SimpleCaptcha #:nodoc
       end
 
       def simple_captcha_refresh_button(options={})
-        link_to(:refresh, "#{ENV['RAILS_RELATIVE_URL_ROOT']}/simple_captcha", remote: true)
+        html = {remote: true}
+        html.merge!(options[:refresh_button_html] || {})
+        text = options[:refresh_button_text] || :refresh
+
+        link_to(text, "#{ENV['RAILS_RELATIVE_URL_ROOT']}/simple_captcha", html)
       end
 
       def set_simple_captcha_data(key, options={})
