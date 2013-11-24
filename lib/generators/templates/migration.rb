@@ -5,7 +5,7 @@ class CreateSimpleCaptchaData < ActiveRecord::Migration
       t.string :value, :limit => 6
       t.timestamps
     end
-    
+
     add_index :simple_captcha_data, :key, :name => "idx_key"
   end
 
