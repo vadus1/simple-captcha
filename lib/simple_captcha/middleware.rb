@@ -73,7 +73,7 @@ module SimpleCaptcha
 
         status = 200
         body = %Q{
-                    $('.simple_captcha img').attr('src', '#{url}');
+                    $("#captcha_image").attr('src', '#{url}');
                     $("#captcha_key").attr('value', '#{key}');
                   }
         headers = {'Content-Type' => 'text/javascript; charset=utf-8', "Content-Disposition" => "inline; filename='captcha.js'", "Content-Length" => body.length.to_s}
